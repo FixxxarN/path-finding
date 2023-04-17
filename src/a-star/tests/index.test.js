@@ -8,12 +8,12 @@ describe('A*', () => {
     }
 
     const endNode = {
-      y: 0,
-      x: 4,
+      y: 7,
+      x: 7,
     }
 
     const aStar = new AStar();
-    const result = aStar.findPath('o##oo\noo#oo\nooooo', startNode, endNode);
-    expect(result.visualizedPath).toEqual('x##xx\nxx#xo\noxxxo');
+    const result = aStar.findPath('...W...W\n...WW..W\n........\n..WW.W..\n.W..W.W.\nWW...W..\nW..W....\n..W.W.W.', startNode, endNode);
+    expect(result.visualizedPath).toEqual('x##xx\nxx#x.\n.xxx.');
   });
 });

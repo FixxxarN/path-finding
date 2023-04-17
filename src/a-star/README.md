@@ -1,15 +1,39 @@
 First maze:
 ```
-o##oo
-oo#oo
-ooooo
+.##..
+..#..
+.....
 ```
 
 A* path:
 ```
 x##xx
-xx#xo
-oxxxo
+xx#x.
+.xxx.
 
-// o = floor, # = wall, x = path
+// . = floor, # = wall, x = path
+```
+
+Bigger maze:
+```
+...W...W
+...WW..W
+........
+..WW.W..
+.W..W.W.
+WW...W..
+W..W....
+..W.W.W.
+```
+
+A* path:
+```
+xxxW...W
+..xWW..W
+..xxxxxx
+..WW.W.x
+.W..W.Wx
+WW...W.x
+W..W...x
+..W.W.Wx
 ```

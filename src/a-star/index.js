@@ -50,16 +50,16 @@ class AStar {
   }
 
   checkNeighbourNodes(node, startNode, endNode) {
-    if (this.world[`${node.y - 1},${node.x}`] && this.world[`${node.y - 1},${node.x}`].symbol === 'o' && !this.closedNodes[`${node.y - 1},${node.x}`]) {
+    if (this.world[`${node.y - 1},${node.x}`] && this.world[`${node.y - 1},${node.x}`].symbol === '.' && !this.closedNodes[`${node.y - 1},${node.x}`]) {
       this.calculateNodeValues(this.world[`${node.y - 1},${node.x}`], node, startNode, endNode);
     }
-    if (this.world[`${node.y},${node.x + 1}`] && this.world[`${node.y},${node.x + 1}`].symbol === 'o' && !this.closedNodes[`${node.y},${node.x + 1}`]) {
+    if (this.world[`${node.y},${node.x + 1}`] && this.world[`${node.y},${node.x + 1}`].symbol === '.' && !this.closedNodes[`${node.y},${node.x + 1}`]) {
       this.calculateNodeValues(this.world[`${node.y},${node.x + 1}`], node, startNode, endNode);
     }
-    if (this.world[`${node.y + 1},${node.x}`] && this.world[`${node.y + 1},${node.x}`].symbol === 'o' && !this.closedNodes[`${node.y + 1},${node.x}`]) {
+    if (this.world[`${node.y + 1},${node.x}`] && this.world[`${node.y + 1},${node.x}`].symbol === '.' && !this.closedNodes[`${node.y + 1},${node.x}`]) {
       this.calculateNodeValues(this.world[`${node.y + 1},${node.x}`], node, startNode, endNode);
     }
-    if (this.world[`${node.y},${node.x - 1}`] && this.world[`${node.y},${node.x - 1}`].symbol === 'o' && !this.closedNodes[`${node.y},${node.x - 1}`]) {
+    if (this.world[`${node.y},${node.x - 1}`] && this.world[`${node.y},${node.x - 1}`].symbol === '.' && !this.closedNodes[`${node.y},${node.x - 1}`]) {
       this.calculateNodeValues(this.world[`${node.y},${node.x - 1}`], node, startNode, endNode);
     }
 
