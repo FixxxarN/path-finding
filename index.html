@@ -5,8 +5,27 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Path finding</title>
+  <script src="./src/a-star/indexVisual.js" defer></script>
 </head>
 <body>
-  <p>Path finding</p>
+  <div style="display: flex; flex-direction: row; gap: 2rem;">
+    <canvas id="canvas"></canvas>
+    <div>
+      <p>1. Click on a node to place the start node</p>
+      <p>2. Click on the end node button and place the end node somewhere</p>
+      <p>3. Click on the wall button and place walls</p>
+      <p>4. Click on find path to generate a path from start to end</p>
+    </div>
+  </div>
+  <div style="margin-top: 10px;">
+    <button id="floor-button">Floor</button>
+    <button id="wall-button">Wall</button>
+    <button id="start-node-button">Start node</button>
+    <button id="end-node-button">End node</button>
+    <p id="draw-mode-text">Draw mode: start node</p>
+  </div>
+  <div>
+    <button id="find-path-button">Find path</button>
+  </div>
 </body>
 </html>

@@ -1,3 +1,5 @@
+## Part 1 - Text based
+
 First maze:
 ```
 .##..
@@ -37,3 +39,13 @@ WW...W.x
 W..W...x
 ..W.W.Wx
 ```
+
+## Part 2 - Visual
+
+Maze:
+
+<img src="../../assets/world.png">
+
+A* path:
+
+<img src="../../assets/worldWithPath.png">
