@@ -59,8 +59,10 @@ const calculateNodeValues = (node, parentNode, startNode, endNode) => {
   node.hCost = Math.abs(node.x - endNode.x) + Math.abs(node.y - endNode.y)
   node.fCost = node.gCost + node.hCost;
 
-  const parentCoordinates = parentNode && `${parentNode.y},${parentNode.x}`;
-  node.parentCoordinates = parentCoordinates;
+  if (!node.parentCoordinates) {
+    const parentCoordinates = parentNode && `${parentNode.y},${parentNode.x}`;
+    node.parentCoordinates = parentCoordinates;
+  }
 
   if (!openNodes[`${node.y},${node.x}`]) {
     openNodes[`${node.y},${node.x}`] = node;
