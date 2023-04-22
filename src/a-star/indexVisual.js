@@ -55,52 +55,54 @@ const initializeWorld = () => {
 }
 
 const calculateNodeValues = (node, parentNode, startNode, endNode) => {
-  node.gCost = parentNode.gCost + 1;
-  node.hCost = Math.abs(node.x - endNode.x) + Math.abs(node.y - endNode.y)
-  node.fCost = node.gCost + node.hCost;
+  if (node.type !== 'floor' || closedNodes[`${node.y},${node.x}`]) return;
 
-  if (!node.parentCoordinates) {
-    const parentCoordinates = parentNode && `${parentNode.y},${parentNode.x}`;
-    node.parentCoordinates = parentCoordinates;
-  }
+  const gCost = parentNode.gCost + 1;
+  const hCost = Math.abs(node.x - endNode.x) + Math.abs(node.y - endNode.y)
+  const fCost = gCost + hCost;
 
-  if (!openNodes[`${node.y},${node.x}`]) {
-    openNodes[`${node.y},${node.x}`] = node;
-  }
-  else {
-    if (openNodes[`${node.y},${node.x}`].fCost > node.fCost) {
+  if ((openNodes[`${node.y},${node.x}`] && fCost < openNodes[`${node.y},${node.x}`].fCost) || !openNodes[`${node.y},${node.x}`]) {
+    node.gCost = gCost;
+    node.hCost = hCost;
+    node.fCost = fCost;
+    if (!openNodes[`${node.y},${node.x}`]) {
+      const parentCoordinates = parentNode && `${parentNode.y},${parentNode.x}`;
+      node.parentCoordinates = parentCoordinates;
       openNodes[`${node.y},${node.x}`] = node;
     }
   }
 }
 
 checkNeighbourNodes = (node, startNode, endNode) => {
-  if (world[`${node.y - 1},${node.x}`] && world[`${node.y - 1},${node.x}`].type === 'floor' && !closedNodes[`${node.y - 1},${node.x}`]) {
+  if (world[`${node.y - 1},${node.x}`]) {
     calculateNodeValues(world[`${node.y - 1},${node.x}`], node, startNode, endNode);
   }
-  if (world[`${node.y},${node.x + 1}`] && world[`${node.y},${node.x + 1}`].type === 'floor' && !closedNodes[`${node.y},${node.x + 1}`]) {
+  if (world[`${node.y},${node.x + 1}`]) {
     calculateNodeValues(world[`${node.y},${node.x + 1}`], node, startNode, endNode);
   }
-  if (world[`${node.y + 1},${node.x}`] && world[`${node.y + 1},${node.x}`].type === 'floor' && !closedNodes[`${node.y + 1},${node.x}`]) {
+  if (world[`${node.y + 1},${node.x}`]) {
     calculateNodeValues(world[`${node.y + 1},${node.x}`], node, startNode, endNode);
   }
-  if (world[`${node.y},${node.x - 1}`] && world[`${node.y},${node.x - 1}`].type === 'floor' && !closedNodes[`${node.y},${node.x - 1}`]) {
+  if (world[`${node.y},${node.x - 1}`]) {
     calculateNodeValues(world[`${node.y},${node.x - 1}`], node, startNode, endNode);
   }
 
   closedNodes[`${node.y},${node.x}`] = node;
 }
 
-const visualizePath = (node) => {
-  path.push(node);
-  if (!node?.parentCoordinates) {
+const visualizePath = (node, pathLength) => {
+  const newPathLength = pathLength + 1;
+  if (node && path.findIndex((pathNode) => pathNode.x === node.x && pathNode.y === node.y) < 0) {
+    path.push(node);
+  }
+  if (pathLength === path.length) {
     path.slice(1, path.length - 1).reverse().forEach((node) => {
       rows[node.y][node.x].type = 'path';
     })
     drawWorld();
     return;
   }
-  visualizePath(world[node.parentCoordinates])
+  visualizePath(world[node?.parentCoordinates], newPathLength)
 }
 
 const findPath = () => {
@@ -120,7 +122,7 @@ const findPath = () => {
     delete openNodes[`${currentNode.y},${currentNode.x}`]
 
     if (currentNode.x === endNode.x && currentNode.y === endNode.y) {
-      visualizePath(currentNode);
+      visualizePath(currentNode, 0);
       break;
     }
 
